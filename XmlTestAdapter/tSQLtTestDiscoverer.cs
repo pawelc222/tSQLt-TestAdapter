@@ -21,6 +21,9 @@ namespace tSQLtTestAdapter
 
         public void DiscoverTests(IEnumerable<string> sources, IDiscoveryContext discoveryContext, IMessageLogger logger, ITestCaseDiscoverySink discoverySink)
         {
+            logger.SendMessage(TestMessageLevel.Informational, $"BzztDebug: runSettings: {discoveryContext.RunSettings.SettingsXml}");
+            logger.SendMessage(TestMessageLevel.Informational, $"BzztDebug: sources: {string.Join(",", sources)}");
+
             if (string.IsNullOrEmpty(new RunSettings(discoveryContext.RunSettings).GetSetting("TestDatabaseConnectionString")))
             {
                 logger.SendMessage(TestMessageLevel.Informational, "No RunSettings TestDatabaseConnectionString set - will not attempt to discover tests..");
